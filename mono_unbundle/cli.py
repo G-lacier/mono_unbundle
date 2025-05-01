@@ -12,12 +12,12 @@ Arguments:
     PATH             Output directory for extracted DLL files.
 
 Options:
-    --help, -h       Print this help messsage.
+    --help, -h       Print this help message.
     -v, --verbose    Output verbose messages.
     --version        Display version information.
 """
 from docopt import docopt
-from . import MonoBundle
+from .mono_bundle import MonoBundle
 from . import __version__
 
 
@@ -25,6 +25,8 @@ def cli():
     arguments = docopt(__doc__)
     if arguments["--version"]:
         print("mono_unbundle %s" % __version__)
+        return
+
     file = arguments['FILE']
     path = arguments['PATH']
     verbose = arguments['--verbose']
@@ -34,4 +36,3 @@ def cli():
 
 if __name__ == "__main__":
     cli()
-
