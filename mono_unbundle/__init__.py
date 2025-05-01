@@ -1,3 +1,1 @@
-from .__version__ import __version__
-
-from .bundle import MonoBundle
+from .version import __version__
