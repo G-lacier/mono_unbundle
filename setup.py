@@ -1,23 +1,18 @@
 from setuptools import setup, find_packages
 from os import path
-import json
 
 here = path.abspath(path.dirname(__file__))
 
-# Read long description
+# Read long description from README
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-# Read dependencies directly from Pipfile.lock
-def load_requirements_from_pipfile_lock(lockfile_path):
-    with open(lockfile_path, encoding='utf-8') as f:
-        lock = json.load(f)
-    return [
-        f"{pkg}{lock['default'][pkg]['version']}"
-        for pkg in lock['default']
-    ]
+# Load dependencies from requirements.txt
+def load_requirements(filename):
+    with open(filename) as f:
+        return [line.strip() for line in f if line.strip() and not line.startswith('#')]
 
-requirements = load_requirements_from_pipfile_lock(path.join(here, 'Pipfile.lock'))
+requirements = load_requirements(path.join(here, 'requirements.txt'))
 
 setup(
     name='mono_unbundle',
